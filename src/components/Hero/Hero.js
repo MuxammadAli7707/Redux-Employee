@@ -25,7 +25,7 @@ const Hero = ({search, setSearch}) => {
   }, [arr]);
   
   const searchHandler = (e) => {
-    setSearch(arr.filter(item => item.name.includes(e.target.value)));
+    setSearch(arr.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase())));
   }
 
   const employee = useSelector((state) => state.employee);
