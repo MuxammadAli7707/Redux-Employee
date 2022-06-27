@@ -1,6 +1,6 @@
 .hero__left{
   width: 320px;
-  height: 100% !important;
+  min-height: 100vh;
   display: flex;
   position: absolute;
   left: 0;
@@ -260,6 +260,11 @@ input[type="date"]{
   margin-bottom: 15px;
 }
 
+.name-hint {
+  color: red;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
 .modal-submit-btn{
   background-color: rgb(35, 39, 105);
   box-shadow: 0px 2px 4px -1px #00000033, 0px 4px 5px 0px #00000024, 0px 1px 10px 0px #0000001f;

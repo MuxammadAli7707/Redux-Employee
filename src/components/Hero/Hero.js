@@ -7,7 +7,6 @@ import EditModal from "../EditModal/EditModal";
 const Hero = ({search, setSearch}) => {
   const arr = useSelector(state => state.employee);
   const dispatch = useDispatch();
-
   const [id, setId] = useState();
 
   const idEditHandler = (elId) => {

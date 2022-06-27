@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee } from "../../store/EployeeSlice";
 const Modal = () => {
   const dispatch = useDispatch();
 
   const employee = useSelector((state) => state.employee);
+
+  // input
+  let [fnames, setfnames] = useState('afd')
+  let [emails, setEmails] = useState('@')
+  let [phones, setPhones] = useState('45464460')
+  let [citys, setCitys] = useState('ewe')
+
+
+  // validation
+  let [fname, setfname] = useState('')
+  let [email, setEmail] = useState('')
+  let [phone, setPhone] = useState('')
+  let [city, setCity] = useState('')
+
+
+  console.log(fnames);
 
   let [tempObj, setTempObj] = useState({
     id: employee.length + 1,
@@ -20,10 +36,17 @@ const Modal = () => {
   };
 
   const nameHandler = (e) => {
+    setfnames(e.target.value)
     setTempObj({ ...tempObj, name: e.target.value });
   };
 
+  const cityHandler = (e) => {
+    setCitys(e.target.value)
+    setTempObj({ ...tempObj, city: e.target.value });
+  };
+
   const emailHandler = (e) => {
+    setEmails(e.target.value)
     setTempObj({ ...tempObj, email: e.target.value });
   };
 
@@ -32,8 +55,32 @@ const Modal = () => {
   };
 
   const phoneHandler = (e) => {
+    setPhones(e.target.value)
     setTempObj({ ...tempObj, number: e.target.value });
   };
+
+  useEffect(() => {
+    if(fnames === "" || fnames.match(/[0-9]/) || fnames.match(/[!@#&%*$^]/) || fnames.includes("  ") || fnames.length < 2) {
+      setfname(true)
+    }else {
+      setfname(false)
+    }
+    if(! emails.includes('@') && ! emails.includes('.')) {
+      setEmail(true)
+    }else {
+      setEmail(false)
+    }
+    if(phones.length === "" || phones.length < 8 || Number.isInteger(phones)) {
+      setPhone(true)
+    }else {
+      setPhone(false)
+    }
+    if(citys === "" || citys.match(/[0-9]/) || citys.match(/[!@#&%*$^]/) || citys.includes("  ") || citys.length < 2) {
+      setCity(true)
+    }else {
+      setCity(false)
+    }
+  }, [fnames, emails, phones, citys]);
 
   return (
     <div>
@@ -73,7 +120,7 @@ const Modal = () => {
                       required
                       onChange={nameHandler}
                     />
-                    <p className="name-hint hint" />
+                    <p className={`name-hint hint ${fname ? 'block' : "none"}`}>This field is required.</p>
                   </div>
                   <div className="hero__modal-input-box">
                     <input
@@ -84,18 +131,18 @@ const Modal = () => {
                       required
                       onChange={emailHandler}
                     />
-                    <p className="email-hint hint" />
+                    <p className={`name-hint hint ${email ? 'block' : "none"}`}>Email is not valid.</p>
                   </div>
                   <div className="hero__modal-input-box">
                     <input
-                      type="tel"
+                      type="number"
                       className=" form-control input-phone"
                       name="phone"
                       placeholder="Phone"
                       required
                       onChange={phoneHandler}
                     />
-                    <p className="phone-hint hint" />
+                    <p className={`name-hint hint ${phone ? 'block' : "none"}`}>Minimum 8 numbers required.</p>
                   </div>
                   <div className="hero__modal-input-box">
                     <input
@@ -103,7 +150,9 @@ const Modal = () => {
                       className=" form-control city-input"
                       name="city"
                       placeholder="City"
+                      onChange={cityHandler}
                     />
+                    <p className={`name-hint hint ${city ? 'block' : "none"}`}>This field is required.</p>
                   </div>
                 </div>
                 <div className="hero__modal-radio col-6">
