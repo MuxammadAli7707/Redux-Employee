@@ -23,7 +23,7 @@ const Header = () => {
               <span className="position-relative">
                 <i className="bx bx-bell" />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  4<span className="visually-hidden">unread messages</span>
+                  7<span className="visually-hidden">unread messages</span>
                 </span>
               </span>
             </button>
@@ -33,7 +33,7 @@ const Header = () => {
               <span className="position-relative">
                 <i className="bx bx-message-square" />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill pill-blue bg-danger">
-                  3<span className="visually-hidden">unread messages</span>
+                  7<span className="visually-hidden">unread messages</span>
                 </span>
               </span>
             </button>
